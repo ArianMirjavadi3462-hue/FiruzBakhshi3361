@@ -156,11 +156,50 @@
       .logo{width:48px;height:48px}
       .hero-figure img{height:220px}
     }
+    /* Doctor Circular Avatar (Top Right Hero) */
+.doctor-avatar{
+  position: absolute;
+  top: 22px;
+  left: 22px; /* چون RTL هست، سمت راست صفحه دیده میشه */
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  border: 4px solid #ffffff;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  z-index: 5;
+}
+
+.doctor-avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* برای اینکه روی hero درست سوار بشه */
+.hero{
+  position: relative;
+}
+
+/* موبایل */
+@media (max-width: 768px){
+  .doctor-avatar{
+    width: 90px;
+    height: 90px;
+    top: 14px;
+    left: 14px;
+  }
+}
   </style>
 </head>
 <body>
   <div class="wrap">
-
+<!-- Doctor Photo -->
+<div class="doctor-avatar">
+  <img src="favicon2.jpg" alt="عکس دکتر">
+</div>
     <!-- Header -->
     <header>
       <div class="brand">
