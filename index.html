@@ -288,34 +288,46 @@
         </div>
       </div>
     </section>
+    <form id="contactForm">
+  <label>نام و نام خانوادگی</label>
+  <input type="text" name="name" placeholder="مثلاً: علی رضایی" required>
 
-    <!-- Contact -->
-    <section id="contact" class="card" aria-labelledby="contact-heading">
-      <h3 id="contact-heading">تماس و درخواست تماس</h3>
+  <label>شماره تماس</label>
+  <input type="tel" name="phone" placeholder="مثلاً: 09xxxxxxxxx" required>
 
-      <div class="contact-grid">
-        <div class="left">
-          <p style="color:var(--muted)">برای تماس فوری یا رزرو وقت می‌توانید از دکمهٔ تماس استفاده کنید یا فرم را پر کنید تا تیم مطب با شما تماس بگیرد.</p>
-          <p style="margin-top:12px"><strong>تلفن مطب:</strong> <a href="tel:09149513361">09149513361</a></p>
-        </div>
-        <div class="right" aria-hidden="false">
-          <strong>فرم سریع درخواست تماس</strong>
-          <form onsubmit="event.preventDefault(); alert('درخواست شما ثبت شد — این فرم نمونه است.');" style="margin-top:10px">
-            <label style="display:block;margin-bottom:6px">نام و نام خانوادگی</label>
-            <input type="text" placeholder="مثلاً: علی رضایی" required>
+  <label>خلاصه مشکل (اختیاری)</label>
+  <textarea name="problem" rows="4" placeholder="مثلاً: سرفه، ضعف، یا سوال در مورد واکسیناسیون"></textarea>
 
-            <label style="display:block;margin:10px 0 6px">شماره تماس</label>
-            <input type="tel" placeholder="مثلاً: 09xxxxxxxxx" required>
+  <button type="submit">ارسال درخواست</button>
+</form>
 
-            <label style="display:block;margin:10px 0 6px">خلاصه مشکل (اختیاری)</label>
-            <textarea rows="4" placeholder="مثلاً: سرفه، ضعف، یا سوال در مورد واکسیناسیون"></textarea>
+<script>
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', function(e){
+    e.preventDefault(); // جلوگیری از رفرش صفحه
 
-            <button type="submit">ارسال درخواست</button>
-          </form>
-        </div>
-      </div>
-    </section>
+    const data = {
+        name: form.name.value,
+        phone: form.phone.value,
+        problem: form.problem.value
+    };
 
+    fetch('https://hook.us2.make.com/c5tfqsbfp68w4l5v82ofpp6n7zlu4boz', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(res => {
+        if(res.ok){
+            alert('درخواست شما ثبت شد و پیامک ارسال شد!');
+            form.reset();
+        } else {
+            alert('خطا در ارسال فرم.');
+        }
+    })
+    .catch(err => alert('خطا: ' + err));
+});
+</script>
     <!-- Footer -->
     <footer>
       <div>
